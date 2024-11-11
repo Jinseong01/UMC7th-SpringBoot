@@ -80,43 +80,43 @@ public class Application {
 //		};
 //	}
 
-//	@Bean
-//	public CommandLineRunner run3(ApplicationContext context) {
-//		return args -> {
-//			UserMissionQueryService userMissionService = context.getBean(UserMissionQueryService.class);
-//
-//			Long userId = 1L;
-//			Long regionId = 1L;
-//			UserMissionStatus userMissionStatusC = UserMissionStatus.COMPLETE;
-//			UserMissionStatus userMissionStatusI = UserMissionStatus.INPROGRESS;
-//
-//			System.out.println("------------------------");
-//			System.out.println("userId: " + userId);
-//			System.out.println("regionId: " + regionId);
-//
-//			List<UserMissionEntity> tmp1 = userMissionService.findUserMissionByUserIdAndRegionIdAndUserMissionStatus(userId, regionId, userMissionStatusC, 0, 0);
-//			System.out.println("완료 개수 : " + tmp1.size());
-//			tmp1.forEach(userMission -> System.out.println(userMission.getMissionEntity()));
-//
-//
-//			List<UserMissionEntity> tmp2 = userMissionService.findUserMissionByUserIdAndRegionIdAndUserMissionStatus(userId, regionId, userMissionStatusI, 0,0);
-//			System.out.println("진행중 개수 : " + tmp2.size());
-//			tmp2.forEach(userMission -> System.out.println(userMission.getMissionEntity()));
-//		};
-//	}
-
 	@Bean
-	public CommandLineRunner run4(ApplicationContext context) {
+	public CommandLineRunner run3(ApplicationContext context) {
 		return args -> {
-			UserQueryService userQueryService = context.getBean(UserQueryService.class);
+			UserMissionQueryService userMissionService = context.getBean(UserMissionQueryService.class);
 
-			Long userId = 3L;
+			Long userId = 1L;
+			Long regionId = 1L;
+			UserMissionStatus userMissionStatusC = UserMissionStatus.COMPLETE;
+			UserMissionStatus userMissionStatusI = UserMissionStatus.INPROGRESS;
 
 			System.out.println("------------------------");
 			System.out.println("userId: " + userId);
+			System.out.println("regionId: " + regionId);
 
-			UserEntity userEntity = userQueryService.findUser(userId);
-			System.out.println(userEntity);
+			List<UserMissionEntity> tmp1 = userMissionService.findUserMissionByUserIdAndRegionIdAndUserMissionStatus(userId, regionId, userMissionStatusC, 1, 10);
+			System.out.println("완료 개수 : " + tmp1.size());
+			tmp1.forEach(userMission -> System.out.println(userMission.getMissionEntity()));
+
+
+			List<UserMissionEntity> tmp2 = userMissionService.findUserMissionByUserIdAndRegionIdAndUserMissionStatus(userId, regionId, userMissionStatusI, 1,10);
+			System.out.println("진행중 개수 : " + tmp2.size());
+			tmp2.forEach(userMission -> System.out.println(userMission.getMissionEntity()));
 		};
 	}
+
+//	@Bean
+//	public CommandLineRunner run4(ApplicationContext context) {
+//		return args -> {
+//			UserQueryService userQueryService = context.getBean(UserQueryService.class);
+//
+//			Long userId = 3L;
+//
+//			System.out.println("------------------------");
+//			System.out.println("userId: " + userId);
+//
+//			UserEntity userEntity = userQueryService.findUser(userId);
+//			System.out.println(userEntity);
+//		};
+//	}
 }
