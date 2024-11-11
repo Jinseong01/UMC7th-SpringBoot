@@ -76,4 +76,16 @@ public class UserEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
     private List<InquiryEntity> inquiryEntityList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", point=" + point +
+                ", isVerified=" + isVerified +
+                '}';
+    }
 }

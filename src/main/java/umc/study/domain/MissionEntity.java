@@ -28,10 +28,21 @@ public class MissionEntity extends BaseEntity {
 
     private LocalDate deadline;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "store_id")
     private StoreEntity storeEntity;
 
     @OneToMany(mappedBy = "missionEntity", cascade = CascadeType.ALL)
     private List<UserMissionEntity> userMissionEntityList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", reward='" + reward + '\'' +
+                ", deadline=" + deadline +
+                ", store=" + (storeEntity != null ? storeEntity.getName() : "N/A") +
+                '}';
+    }
 }
