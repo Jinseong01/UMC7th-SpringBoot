@@ -58,6 +58,8 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
                 .join(mission.storeEntity, store).fetchJoin()
                 .join(store.regionEntity, region).fetchJoin()
                 .where(bb)
+                .offset((long)(page - 1) * size)
+                .limit(size)
                 .fetch();
     }
 }
