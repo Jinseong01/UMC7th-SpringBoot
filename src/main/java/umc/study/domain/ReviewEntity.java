@@ -20,7 +20,7 @@ public class ReviewEntity extends BaseEntity {
     private Long id;
 
     @Column(nullable = false, length = 20)
-    private String nickName;
+    private String nickname;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -43,4 +43,16 @@ public class ReviewEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "reviewEntity", cascade = CascadeType.ALL)
     private List<ReviewImageEntity> reviewImageEntityList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", content='" + content + '\'' +
+                ", score='" + score + '\'' +
+                ", userId=" + (userEntity != null ? userEntity.getId() : "N/A") +
+                ", storeId=" + (storeEntity != null ? storeEntity.getId() : "N/A") +
+                '}';
+    }
 }

@@ -45,4 +45,15 @@ public class StoreEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "storeEntity", cascade = CascadeType.ALL)
     private List<MissionEntity> missionEntityList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (regionEntity != null ? regionEntity.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 }
