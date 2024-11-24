@@ -1,7 +1,7 @@
 ---
 name: "✏️ feature"
 about: 기능을 추가합니다.
-title: "[feature]"
+title: "[feat]"
 labels: feature
 assignees: ''
 

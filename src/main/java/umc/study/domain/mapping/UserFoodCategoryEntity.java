@@ -9,6 +9,7 @@ import umc.study.domain.common.BaseEntity;
 @Table(name = "user_food_category")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -26,4 +27,15 @@ public class UserFoodCategoryEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_category_id")
     private FoodCategoryEntity foodCategoryEntity;
+
+    public void setUser(UserEntity user){
+        if(this.userEntity != null)
+            user.getUserFoodCategoryEntityList().remove(this);
+        this.userEntity = user;
+        user.getUserFoodCategoryEntityList().add(this);
+    }
+
+    public void setFoodCategory(FoodCategoryEntity foodCategory){
+        this.foodCategoryEntity = foodCategory;
+    }
 }
