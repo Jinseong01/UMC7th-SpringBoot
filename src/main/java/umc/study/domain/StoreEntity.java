@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "store")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -55,5 +56,13 @@ public class StoreEntity extends BaseEntity {
                 ", score=" + score +
                 ", region=" + (regionEntity != null ? regionEntity.getName() : "N/A") + // region의 이름 출력
                 '}';
+    }
+
+    public void setRegion(RegionEntity region){
+        if(this.regionEntity != null) {
+            region.getStoreEntityList().remove(this);
+        }
+        this.regionEntity = region;
+        region.getStoreEntityList().add(this);
     }
 }
