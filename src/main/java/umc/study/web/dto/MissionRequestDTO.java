@@ -3,15 +3,18 @@ package umc.study.web.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import java.math.BigDecimal;
 
-public class ReviewRequestDTO {
+
+public class MissionRequestDTO {
     @Getter
-    public static class ReviewAddDTO {
+    public static class MissionAddDTO {
         @NotBlank
         String content;
 
         @NotNull
-        BigDecimal score;
+        Integer score;
+
+        @NotBlank
+        String deadline;
     }
 }

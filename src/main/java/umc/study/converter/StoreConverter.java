@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class StoreConverter {
-    public static StoreEntity toStore(StoreRequestDTO.storeDTO request) {
+    public static StoreEntity toStore(StoreRequestDTO.AddDTO request) {
         return StoreEntity.builder()
                 .name(request.getName())
                 .address(request.getAddress())
@@ -18,8 +18,8 @@ public class StoreConverter {
                 ;
     }
 
-    public static StoreResponseDTO.storeDTO toResultDTO(StoreEntity store){
-        return StoreResponseDTO.storeDTO.builder()
+    public static StoreResponseDTO.AddResultDTO toResultDTO(StoreEntity store){
+        return StoreResponseDTO.AddResultDTO.builder()
                 .storeId(store.getId())
                 .createdAt(LocalDateTime.now())
                 .build()

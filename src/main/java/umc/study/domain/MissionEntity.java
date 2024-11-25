@@ -45,4 +45,13 @@ public class MissionEntity extends BaseEntity {
                 ", store=" + (storeEntity != null ? storeEntity.getName() : "N/A") +
                 '}';
     }
+
+    // mission-store 연관관계
+    public void setStore(StoreEntity store){
+        if(this.storeEntity != null) {
+            store.getMissionEntityList().remove(this);
+        }
+        this.storeEntity = store;
+        store.getMissionEntityList().add(this);
+    }
 }

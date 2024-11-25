@@ -22,7 +22,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 
     @Override
     @Transactional
-    public ReviewEntity addReview(ReviewRequestDTO.reviewDTO request, Long storeId) {
+    public ReviewEntity addReview(ReviewRequestDTO.ReviewAddDTO request, Long storeId) {
         // 사용자로부터 데이터 받아서 entity로 변환
         ReviewEntity review = ReviewConverter.toReview(request);
 

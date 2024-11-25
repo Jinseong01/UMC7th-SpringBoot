@@ -9,7 +9,7 @@ import java.util.List;
 
 public class StoreRequestDTO {
     @Getter
-    public static class storeDTO {
+    public static class AddDTO {
         @NotBlank
         String name;
 
