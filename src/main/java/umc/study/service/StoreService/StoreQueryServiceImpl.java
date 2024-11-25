@@ -34,4 +34,9 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     public StoreEntity findStoreByMissionId(Long missionId) {
         return null;
     }
+
+    @Override
+    public Boolean exist(Long id) {
+        return storeRepository.existsById(id);
+    }
 }

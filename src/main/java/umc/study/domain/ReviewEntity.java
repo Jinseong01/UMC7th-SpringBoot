@@ -55,4 +55,23 @@ public class ReviewEntity extends BaseEntity {
                 ", storeId=" + (storeEntity != null ? storeEntity.getId() : "N/A") +
                 '}';
     }
+
+    // review-store 연관관계
+    public void setStore(StoreEntity store){
+        if(this.storeEntity != null) {
+            store.getReviewEntityList().remove(this);
+        }
+        this.storeEntity = store;
+        store.getReviewEntityList().add(this);
+    }
+
+    // review-user 연관관계
+    public void setUser(UserEntity user){
+        if(this.userEntity != null) {
+            user.getReviewEntityList().remove(this);
+        }
+        this.userEntity = user;
+        this.nickname = user.getNickname();
+        user.getReviewEntityList().add(this);
+    }
 }

@@ -10,4 +10,6 @@ public interface StoreQueryService {
     Optional<StoreEntity> findStore(Long id);
     List<StoreEntity> findStoresByNameAndScore(String name, Float score);
     StoreEntity findStoreByMissionId(Long missionId);
+
+    public Boolean exist(Long id);
 }
