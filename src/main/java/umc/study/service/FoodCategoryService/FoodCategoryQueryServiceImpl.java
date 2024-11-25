@@ -6,7 +6,7 @@ import umc.study.repository.FoodCategoryRepository.FoodCategoryRepository;
 
 @Service
 @RequiredArgsConstructor
-public class FoodCategoryServiceImpl implements FoodCategoryQueryService {
+public class FoodCategoryQueryServiceImpl implements FoodCategoryQueryService {
 
     private final FoodCategoryRepository foodCategoryRepository;
 

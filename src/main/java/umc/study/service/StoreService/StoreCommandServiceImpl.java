@@ -26,7 +26,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
 
     @Override
     @Transactional
-    public StoreEntity addStore(StoreRequestDTO.storeDTO request) {
+    public StoreEntity addStore(StoreRequestDTO.AddDTO request) {
         // 사용자로부터 데이터 받아서 entity로 변환
         StoreEntity store = StoreConverter.toStore(request);
 

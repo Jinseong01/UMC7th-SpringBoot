@@ -6,7 +6,7 @@ import umc.study.web.dto.ReviewResponseDTO;
 import java.time.LocalDateTime;
 
 public class ReviewConverter {
-    public static ReviewEntity toReview(ReviewRequestDTO.reviewDTO request) {
+    public static ReviewEntity toReview(ReviewRequestDTO.ReviewAddDTO request) {
         return ReviewEntity.builder()
                 .content(request.getContent())
                 .score(request.getScore())
@@ -14,8 +14,8 @@ public class ReviewConverter {
                 ;
     }
 
-    public static ReviewResponseDTO.reviewDTO toResultDTO(ReviewEntity review){
-        return ReviewResponseDTO.reviewDTO.builder()
+    public static ReviewResponseDTO.ReviewAddResultDTO toResultDTO(ReviewEntity review){
+        return ReviewResponseDTO.ReviewAddResultDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(LocalDateTime.now())
                 .build()

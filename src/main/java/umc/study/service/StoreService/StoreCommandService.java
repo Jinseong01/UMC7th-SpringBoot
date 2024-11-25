@@ -5,5 +5,5 @@ import umc.study.web.dto.StoreRequestDTO;
 
 
 public interface StoreCommandService {
-    public StoreEntity addStore(StoreRequestDTO.storeDTO request);
+    public StoreEntity addStore(StoreRequestDTO.AddDTO request);
 }

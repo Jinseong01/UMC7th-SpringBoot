@@ -14,16 +14,16 @@ import umc.study.web.dto.ReviewResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/reviews")
+@RequestMapping("/review")
 @Validated
 public class ReviewRestController {
 
     private final ReviewCommandService reviewCommandService;
 
     @PostMapping("/{storeId}")
-    public ApiResponse<ReviewResponseDTO.reviewDTO> add(
+    public ApiResponse<ReviewResponseDTO.ReviewAddResultDTO> add(
             @PathVariable("storeId") @ExistStore Long storeId,
-            @RequestBody @Valid ReviewRequestDTO.reviewDTO request){
+            @RequestBody @Valid ReviewRequestDTO.ReviewAddDTO request){
         ReviewEntity review = reviewCommandService.addReview(request, storeId);
         return ApiResponse.onSuccess(ReviewConverter.toResultDTO(review));
     }
