@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import umc.study.domain.MissionEntity;
 import umc.study.domain.enums.UserMissionStatus;
 import umc.study.domain.mapping.UserMissionEntity;
+import umc.study.repository.MissionRepository.MissionRepository;
 import umc.study.repository.UserMissionRepository.UserMissionRepository;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class MissionQueryServiceImpl implements MissionQueryService {
 
     private final UserMissionRepository userMissionRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public List<MissionEntity> findMissionByUserIdAndUserMissionStatus(Long userId, UserMissionStatus userMissionStatus, int page, int size) {
@@ -25,5 +27,10 @@ public class MissionQueryServiceImpl implements MissionQueryService {
                 .toList();
 
         return missionList;
+    }
+
+    @Override
+    public Boolean exist(Long id) {
+        return missionRepository.existsById(id);
     }
 }

@@ -6,11 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.handler.FoodCategoryHandler;
 import umc.study.converter.UserConverter;
+import umc.study.converter.UserMissionConverter;
 import umc.study.converter.UserPreferConverter;
 import umc.study.domain.FoodCategoryEntity;
+import umc.study.domain.MissionEntity;
 import umc.study.domain.UserEntity;
 import umc.study.domain.mapping.UserFoodCategoryEntity;
+import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.repository.FoodCategoryRepository.FoodCategoryRepository;
+import umc.study.repository.MissionRepository.MissionRepository;
+import umc.study.repository.UserMissionRepository.UserMissionRepository;
 import umc.study.repository.UserRepository.UserRepository;
 import umc.study.web.dto.UserRequestDTO;
 
@@ -23,6 +28,8 @@ public class UserCommandServiceImpl implements UserCommandService {
 
     private final UserRepository userRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final MissionRepository missionRepository;
+    private final UserMissionRepository userMissionRepository;
 
     @Override
     @Transactional
@@ -49,5 +56,18 @@ public class UserCommandServiceImpl implements UserCommandService {
         // TODO 매핑 테이블 저장 로직
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserMissionEntity addMission(Long userId, Long missionId) {
+        UserMissionEntity userMission = UserMissionConverter.toUserMission();
+
+        UserEntity user = userRepository.findById(userId).get();
+        MissionEntity mission = missionRepository.findById(missionId).get();
+
+        userMission.setUser(user);
+        userMission.setMission(mission);
+
+        return userMissionRepository.save(userMission);
     }
 }

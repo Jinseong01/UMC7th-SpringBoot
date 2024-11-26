@@ -2,6 +2,7 @@ package umc.study.converter;
 
 import umc.study.domain.UserEntity;
 import umc.study.domain.enums.UserGender;
+import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.web.dto.UserRequestDTO;
 import umc.study.web.dto.UserResponseDTO;
 
@@ -12,6 +13,13 @@ public class UserConverter {
     public static UserResponseDTO.JoinResultDTO toJoinResultDTO(UserEntity user){
         return UserResponseDTO.JoinResultDTO.builder()
                 .userId(user.getId())
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static UserResponseDTO.ChallengeMissionResultDTO toChallengeMissionResultDTO(UserMissionEntity userMission){
+        return UserResponseDTO.ChallengeMissionResultDTO.builder()
+                .userMissionId(userMission.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MissionQueryService {
     List<MissionEntity> findMissionByUserIdAndUserMissionStatus(Long userId, UserMissionStatus userMissionStatus, int page, int size);
+
+    Boolean exist(Long id);
 }
