@@ -1,11 +1,17 @@
 package umc.study.service.MissionService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.study.domain.MissionEntity;
+import umc.study.domain.ReviewEntity;
+import umc.study.domain.StoreEntity;
+import umc.study.domain.UserEntity;
 import umc.study.domain.enums.UserMissionStatus;
 import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.repository.MissionRepository.MissionRepository;
+import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.repository.UserMissionRepository.UserMissionRepository;
 import java.util.List;
 
@@ -15,6 +21,7 @@ public class MissionQueryServiceImpl implements MissionQueryService {
 
     private final UserMissionRepository userMissionRepository;
     private final MissionRepository missionRepository;
+    private final StoreRepository storeRepository;
 
     @Override
     public List<MissionEntity> findMissionByUserIdAndUserMissionStatus(Long userId, UserMissionStatus userMissionStatus, int page, int size) {
@@ -32,5 +39,14 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     @Override
     public Boolean exist(Long id) {
         return missionRepository.existsById(id);
+    }
+
+    @Override
+    public Page<MissionEntity> getStoreMissionList(Long storeId, Integer page) {
+        StoreEntity store = storeRepository.findById(storeId).get();
+
+        Page<MissionEntity> missionPage = missionRepository.findAllByStoreEntity(store, PageRequest.of(page, 10));
+
+        return missionPage;
     }
 }
