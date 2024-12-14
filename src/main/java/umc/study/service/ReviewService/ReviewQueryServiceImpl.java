@@ -1,6 +1,8 @@
 package umc.study.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.study.domain.ReviewEntity;
 import umc.study.domain.StoreEntity;
@@ -10,6 +12,7 @@ import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.repository.UserRepository.UserRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +40,23 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
                 ;
 
         return reviewRepository.save(reviewEntity);
+    }
+
+    @Override
+    public Page<ReviewEntity> getReviewList(Long storeId, Integer page) {
+        StoreEntity store = storeRepository.findById(storeId).get();
+
+        Page<ReviewEntity> storePage = reviewRepository.findAllByStoreEntity(store, PageRequest.of(page, 10));
+
+        return storePage;
+    }
+
+    @Override
+    public Page<ReviewEntity> getMyReviewList(Long userId, Integer page) {
+        UserEntity user = userRepository.findById(userId).get();
+
+        Page<ReviewEntity> reviewPage = reviewRepository.findAllByUserEntity(user, PageRequest.of(page, 10));
+
+        return reviewPage;
     }
 }
