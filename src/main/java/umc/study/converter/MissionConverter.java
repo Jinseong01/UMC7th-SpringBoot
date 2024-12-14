@@ -3,6 +3,7 @@ package umc.study.converter;
 import org.springframework.data.domain.Page;
 import umc.study.domain.MissionEntity;
 import umc.study.domain.ReviewEntity;
+import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.web.dto.MissionRequestDTO;
 import umc.study.web.dto.MissionResponseDTO;
 import umc.study.web.dto.ReviewResponseDTO;
@@ -39,7 +40,7 @@ public class MissionConverter {
     }
     public static MissionResponseDTO.MissionPreViewListDTO missionPreViewListDTO(Page<MissionEntity> missionList){
 
-        List<MissionResponseDTO.MissionPreViewDTO> reviewPreViewDTOList = missionList.stream()
+        List<MissionResponseDTO.MissionPreViewDTO> missionPreViewDTOList = missionList.stream()
                 .map(MissionConverter::missionPreViewDTO).collect(Collectors.toList());
 
         return MissionResponseDTO.MissionPreViewListDTO.builder()
@@ -47,8 +48,31 @@ public class MissionConverter {
                 .isFirst(missionList.isFirst())
                 .totalPage(missionList.getTotalPages())
                 .totalElements(missionList.getTotalElements())
-                .listSize(reviewPreViewDTOList.size())
-                .reviewList(reviewPreViewDTOList)
+                .listSize(missionPreViewDTOList.size())
+                .missionList(missionPreViewDTOList)
+                .build();
+    }
+
+    public static MissionResponseDTO.UserMissionPreViewDTO userMissionPreViewDTO(UserMissionEntity userMission){
+        return MissionResponseDTO.UserMissionPreViewDTO.builder()
+                .storeName(userMission.getMissionEntity().getStoreEntity().getName())
+                .content(userMission.getMissionEntity().getContent())
+                .reward(userMission.getMissionEntity().getReward())
+                .deadline(userMission.getMissionEntity().getDeadline())
+                .build();
+    }
+    public static MissionResponseDTO.UserMissionPreViewListDTO userMissionPreViewListDTO(Page<UserMissionEntity> userMissionList){
+
+        List<MissionResponseDTO.UserMissionPreViewDTO> userMissionPreViewDTOList = userMissionList.stream()
+                .map(MissionConverter::userMissionPreViewDTO).collect(Collectors.toList());
+
+        return MissionResponseDTO.UserMissionPreViewListDTO.builder()
+                .isLast(userMissionList.isLast())
+                .isFirst(userMissionList.isFirst())
+                .totalPage(userMissionList.getTotalPages())
+                .totalElements(userMissionList.getTotalElements())
+                .listSize(userMissionPreViewDTOList.size())
+                .missionList(userMissionPreViewDTOList)
                 .build();
     }
 }

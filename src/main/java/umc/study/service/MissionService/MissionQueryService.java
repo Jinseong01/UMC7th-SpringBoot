@@ -3,6 +3,8 @@ package umc.study.service.MissionService;
 import org.springframework.data.domain.Page;
 import umc.study.domain.MissionEntity;
 import umc.study.domain.enums.UserMissionStatus;
+import umc.study.domain.mapping.UserMissionEntity;
+
 import java.util.List;
 
 public interface MissionQueryService {
@@ -11,4 +13,6 @@ public interface MissionQueryService {
     Boolean exist(Long id);
 
     Page<MissionEntity> getStoreMissionList(Long storeId, Integer page);
+
+    Page<UserMissionEntity> getUserMissionList(Long userId, String status, Integer page);
 }

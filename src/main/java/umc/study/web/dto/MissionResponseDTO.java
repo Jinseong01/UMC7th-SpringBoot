@@ -25,7 +25,7 @@ public class MissionResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MissionPreViewListDTO {
-        List<MissionResponseDTO.MissionPreViewDTO> reviewList;
+        List<MissionResponseDTO.MissionPreViewDTO> missionList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -41,5 +41,29 @@ public class MissionResponseDTO {
         String content;
         Integer reward;
         LocalDate createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UserMissionPreViewListDTO {
+        List<MissionResponseDTO.UserMissionPreViewDTO> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UserMissionPreViewDTO {
+        String storeName;
+        String content;
+        Integer reward;
+        LocalDate deadline;
     }
 }
