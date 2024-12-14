@@ -13,6 +13,8 @@ import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.repository.MissionRepository.MissionRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.repository.UserMissionRepository.UserMissionRepository;
+import umc.study.repository.UserRepository.UserRepository;
+
 import java.util.List;
 
 @Service
@@ -22,6 +24,7 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     private final UserMissionRepository userMissionRepository;
     private final MissionRepository missionRepository;
     private final StoreRepository storeRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<MissionEntity> findMissionByUserIdAndUserMissionStatus(Long userId, UserMissionStatus userMissionStatus, int page, int size) {
@@ -48,5 +51,14 @@ public class MissionQueryServiceImpl implements MissionQueryService {
         Page<MissionEntity> missionPage = missionRepository.findAllByStoreEntity(store, PageRequest.of(page, 10));
 
         return missionPage;
+    }
+
+    @Override
+    public Page<UserMissionEntity> getUserMissionList(Long userId, String status, Integer page) {
+        UserEntity user = userRepository.findById(userId).get();
+
+        Page<UserMissionEntity> userMissionPage = userMissionRepository.findAllByUserEntityAndStatus(user, UserMissionStatus.valueOf(status.toUpperCase()), PageRequest.of(page, 10));
+
+        return userMissionPage;
     }
 }

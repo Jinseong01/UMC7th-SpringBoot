@@ -16,6 +16,7 @@ import umc.study.converter.MissionConverter;
 import umc.study.converter.ReviewConverter;
 import umc.study.domain.MissionEntity;
 import umc.study.domain.ReviewEntity;
+import umc.study.domain.mapping.UserMissionEntity;
 import umc.study.service.MissionService.MissionCommandService;
 import umc.study.service.MissionService.MissionQueryService;
 import umc.study.validation.annotation.CheckPage;
@@ -59,5 +60,27 @@ public class MissionRestController {
     ) {
         Page<MissionEntity> missionList = missionQueryService.getStoreMissionList(storeId, page-1);
         return ApiResponse.onSuccess(MissionConverter.missionPreViewListDTO(missionList));
+    }
+
+    @GetMapping("/user/{userId}")
+    @Operation(summary = "사용자의 미션 목록 조회 API",description = "특정 사용자의 미션 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 미션 status와 page 번호를 주세요")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
+    @Parameters({
+            @Parameter(name = "userId", description = "사용자의 아이디, path variable 입니다!"),
+            @Parameter(name = "status", description = "미션 상태, query parameter입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, query parameter입니다!"),
+    })
+    public ApiResponse<MissionResponseDTO.UserMissionPreViewListDTO> getUserMissionList(
+            @PathVariable(name="userId") Long userId,
+            @RequestParam(name="status") String status,
+            @CheckPage @RequestParam(name="page") Integer page
+    ) {
+        Page<UserMissionEntity> missionList = missionQueryService.getUserMissionList(userId, status, page-1);
+        return ApiResponse.onSuccess(MissionConverter.userMissionPreViewListDTO(missionList));
     }
 }
