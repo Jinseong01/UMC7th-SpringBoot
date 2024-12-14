@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.study.domain.enums.UserMissionStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -64,6 +65,19 @@ public class MissionResponseDTO {
         String storeName;
         String content;
         Integer reward;
+        LocalDate deadline;
+    }
+
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UpdateUserMissionPreViewDTO {
+        String storeName;
+        String content;
+        Integer reward;
+        UserMissionStatus status;
         LocalDate deadline;
     }
 }

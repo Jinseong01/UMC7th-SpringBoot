@@ -13,6 +13,7 @@ import umc.study.domain.enums.UserMissionStatus;
 @Table(name = "user_mission")
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

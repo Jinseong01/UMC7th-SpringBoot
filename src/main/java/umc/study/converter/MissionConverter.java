@@ -75,4 +75,15 @@ public class MissionConverter {
                 .missionList(userMissionPreViewDTOList)
                 .build();
     }
+
+
+    public static MissionResponseDTO.UpdateUserMissionPreViewDTO updateUserMissionPreViewDTO(UserMissionEntity userMission){
+        return MissionResponseDTO.UpdateUserMissionPreViewDTO.builder()
+                .storeName(userMission.getMissionEntity().getStoreEntity().getName())
+                .content(userMission.getMissionEntity().getContent())
+                .reward(userMission.getMissionEntity().getReward())
+                .deadline(userMission.getMissionEntity().getDeadline())
+                .status(userMission.getStatus())
+                .build();
+    }
 }
