@@ -53,7 +53,7 @@ public class ReviewRestController {
     })
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(
             @ExistStore @PathVariable(name="storeId") Long storeId,
-            @RequestParam(name="page") Integer page
+            @CheckPage Integer page
     ) {
         Page<ReviewEntity> reviewList = reviewQueryService.getReviewList(storeId, page);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
@@ -75,9 +75,9 @@ public class ReviewRestController {
     })
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getMyReviewList(
             @PathVariable(name="userId") Long userId,
-            @CheckPage @RequestParam(name="page") Integer page
+            @CheckPage Integer page
     ) {
-        Page<ReviewEntity> reviewList = reviewQueryService.getMyReviewList(userId, page-1);
+        Page<ReviewEntity> reviewList = reviewQueryService.getMyReviewList(userId, page);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
     }
 }

@@ -37,7 +37,8 @@ public enum ErrorStatus implements BaseErrorCode {
     UM_INPROGRESS(HttpStatus.BAD_REQUEST, "UM4002", "이미 진행 중인 미션입니다"),
 
     PAGE_WRONG(HttpStatus.BAD_REQUEST, "PAGE4001", "페이지 값은 1이상을 입력하세요"),
-    UM_NOT_FOUND(HttpStatus.NOT_FOUND, "UM4003", "사용자 미션이 없습니다")
+    PAGE_NOT_FOUND(HttpStatus.BAD_REQUEST, "PAGE4002", "페이지 값이 없습니다"),
+    UM_NOT_FOUND(HttpStatus.NOT_FOUND, "UM4003", "사용자 미션이 없습니다"),
     ;
 
     private final HttpStatus httpStatus;
