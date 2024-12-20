@@ -1,6 +1,7 @@
 package umc.study.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.apiPayload.code.status.ErrorStatus;
@@ -30,12 +31,15 @@ public class UserCommandServiceImpl implements UserCommandService {
     private final FoodCategoryRepository foodCategoryRepository;
     private final MissionRepository missionRepository;
     private final UserMissionRepository userMissionRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public UserEntity joinMember(UserRequestDTO.JoinDto request) {
         // 사용자로부터 데이터 받아서 entity로 변환
         UserEntity user = UserConverter.toUser(request);
+
+        user.encodePassword(passwordEncoder.encode(request.getLogin_password()));
 
         // 선호 음식 리스트 조회 (ID로 받기 때문에)
         List<FoodCategoryEntity> foodCategoryList = request.getPreferCategory().stream()
