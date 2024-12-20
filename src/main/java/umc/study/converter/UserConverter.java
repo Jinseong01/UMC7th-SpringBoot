@@ -49,6 +49,7 @@ public class UserConverter {
                 .birthDay(request.getBirthday())
                 .address(request.getAddress())
                 .userFoodCategoryEntityList(new ArrayList<>())
+                .role(request.getRole())
                 .build()
                 ;
     }

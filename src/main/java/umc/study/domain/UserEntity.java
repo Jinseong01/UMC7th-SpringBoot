@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import umc.study.domain.common.BaseEntity;
+import umc.study.domain.enums.Role;
 import umc.study.domain.enums.UserGender;
 import umc.study.domain.enums.UserStatus;
 import umc.study.domain.mapping.UserFoodCategoryEntity;
@@ -31,10 +32,10 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false, length = 10)
     private String login_id;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String login_password;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, length = 20)
@@ -93,5 +94,12 @@ public class UserEntity extends BaseEntity {
                 ", point=" + point +
                 ", isVerified=" + isVerified +
                 '}';
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    
+    public void encodePassword(String password) {
+        this.login_password = password;
     }
 }
